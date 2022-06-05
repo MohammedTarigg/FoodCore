@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:foodcore/screens/restaurantdetails.dart';
+import 'package:foodcore/tools/globals.dart';
 import 'package:foodcore/tools/restaurantsModel.dart';
 import 'package:foodcore/tools/globals.dart' as globals;
 //import 'package:anim_search_bar/anim_search_bar.dart';
@@ -98,7 +100,12 @@ class _searchpageState extends State<searchpage> {
 }
 
 Widget buildrestaurant(RestaurantsModel restaurant) => GestureDetector(
-    onTap: () {},
+    onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => restaurantdetails(restaurant: restaurant)));
+    },
     child: ash(restaurant.name) //== restaurant.name.toLowerCase()
         ? Card(
             child: Stack(

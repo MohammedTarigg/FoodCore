@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:foodcore/tools/userModel.dart';
 
 class accountDetails extends StatefulWidget {
-  const accountDetails({Key? key}) : super(key: key);
 
   @override
   State<accountDetails> createState() => _accountDetailsState();

@@ -5,13 +5,12 @@ import 'package:foodcore/auth/welcomePage.dart';
 import 'package:foodcore/screens/drawerscreens/Acoount.dart';
 import 'package:foodcore/screens/drawerscreens/Feedback.dart';
 import 'package:foodcore/screens/drawerscreens/aboutus.dart';
+import 'package:foodcore/screens/drawerscreens/orders.dart';
 import 'package:foodcore/screens/homebody.dart';
 import 'package:foodcore/screens/search.dart';
 import 'package:foodcore/tools/userModel.dart';
 
 class page1 extends StatefulWidget {
-  const page1({Key? key}) : super(key: key);
-
   @override
   State<page1> createState() => _page1State();
 }
@@ -96,21 +95,10 @@ class _page1State extends State<page1> {
                         leading: Icon(Icons.view_list_outlined,
                             color: Colors.black54),
                         onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: Text('Sorry'),
-                              content: Text('This feature not implemented yet'),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            ),
-                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => orderspage()));
                         }),
                     ListTile(
                         title: Text("Favourite", style: drawertextstyle),

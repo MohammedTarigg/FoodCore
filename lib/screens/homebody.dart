@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:foodcore/screens/filterpage.dart';
+import 'package:foodcore/screens/restaurantdetails.dart';
 import 'package:foodcore/tools/restaurantsModel.dart';
 
 class homebody extends StatefulWidget {
   @override
   State<homebody> createState() => _homebodyState();
 }
-
-var conto = 'asa';
 
 class _homebodyState extends State<homebody> {
   var database = FirebaseFirestore.instance
@@ -16,140 +16,151 @@ class _homebodyState extends State<homebody> {
       .map((snapshot) => snapshot.docs
           .map((doc) => RestaurantsModel.fromMap(doc.data()))
           .toList());
+  var types = [];
+  List<RestaurantsModel> rests = [];
+
   @override
   Widget build(BuildContext context) {
-    return ListView(padding: EdgeInsets.only(top: 5), children: [
-      Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: Text('Sorry'),
-                  content: Text('This feature not implemented yet'),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: Text('OK'),
-                    ),
-                  ],
-                ),
-              );
-            },
-            child: Card(
-              child: Column(
+    return StreamBuilder<List<RestaurantsModel>>(
+        stream: database,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text("Something went wrong");
+          }
+          if (snapshot.connectionState == ConnectionState.active) {
+            rests = snapshot.data!;
+            snapshot.data!.forEach((element) {
+              types.add(element.type);
+            });
+            print(types);
+            return ListView(padding: EdgeInsets.only(top: 5), children: [
+              Row(
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 31 / 100,
-                    child: Image.asset('assets/images/booking.jpg'),
+                  GestureDetector(
+                    onTap: () {
+                      rests = [];
+                      snapshot.data!.forEach((element) {
+                        if (element.type.contains('dinein')) {
+                          print(element.name);
+                          setState(() {
+                            rests.add(element);
+                          });
+                        }
+                      });
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => filterpage(rests: rests)));
+                    },
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 31 / 100,
+                            child: Image.asset('assets/images/booking.jpg'),
+                          ),
+                          Text(
+                            'Dine in',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'OpenSans'),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                  Text(
-                    'Dine in',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, fontFamily: 'OpenSans'),
+                  GestureDetector(
+                    onTap: () {
+                      rests = [];
+                      snapshot.data!.forEach((element) {
+                        if (element.type.contains('takeaway')) {
+                          print(element.name);
+                          setState(() {
+                            rests.add(element);
+                          });
+                        }
+                      });
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => filterpage(rests: rests)));
+                    },
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 31 / 100,
+                            child: Image.asset('assets/images/takeaway.jpg'),
+                          ),
+                          Text(
+                            'Take away',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'OpenSans'),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      rests = [];
+                      snapshot.data!.forEach((element) {
+                        if (element.type.contains('delivery')) {
+                          print(element.name);
+                          setState(() {
+                            rests.add(element);
+                          });
+                        }
+                      });
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => filterpage(rests: rests)));
+                    },
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 31 / 100,
+                            child: Image.asset('assets/images/delivery.jpg'),
+                          ),
+                          Text(
+                            'Dilevery',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'OpenSans'),
+                          )
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: Text('Sorry'),
-                  content: Text('This feature not implemented yet'),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: Text('OK'),
-                    ),
-                  ],
-                ),
-              );
-            },
-            child: Card(
-              child: Column(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 31 / 100,
-                    child: Image.asset('assets/images/takeaway.jpg'),
-                  ),
-                  Text(
-                    'Take away',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, fontFamily: 'OpenSans'),
-                  )
-                ],
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: Text('Sorry'),
-                  content: Text('This feature not implemented yet'),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: Text('OK'),
-                    ),
-                  ],
-                ),
-              );
-            },
-            child: Card(
-              child: Column(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 31 / 100,
-                    child: Image.asset('assets/images/delivery.jpg'),
-                  ),
-                  Text(
-                    'Dilevery',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, fontFamily: 'OpenSans'),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-      StreamBuilder<List<RestaurantsModel>>(
-          stream: database,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text("Something went wrong");
-            }
-            if (snapshot.connectionState == ConnectionState.active) {
-              return ListView(
+              ListView(
                   shrinkWrap: true,
                   primary: false,
-                  children: snapshot.data!.map(buildrestaurant).toList());
-            }
-            return Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 3,
-                backgroundColor: Colors.black,
-                color: Colors.blueGrey,
-              ),
-            );
-          })
-    ]);
+                  children: rests.map(buildrestaurant).toList())
+            ]);
+          }
+          return Center(
+            child: CircularProgressIndicator(
+              strokeWidth: 3,
+              backgroundColor: Colors.black,
+              color: Colors.blueGrey,
+            ),
+          );
+        });
   }
 
   Widget buildrestaurant(RestaurantsModel restaurant) => GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      restaurantdetails(restaurant: restaurant)));
+        },
         child: Card(
           child: Stack(
             children: [
