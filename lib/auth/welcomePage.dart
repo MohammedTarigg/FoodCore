@@ -99,6 +99,8 @@ class _welcomepageState extends State<welcomepage> {
             email: emailController.text.trim(),
             password: passwordController.text.trim());
         // ignore: unused_catch_clause
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => page1()));
       } on FirebaseAuthException catch (e) {
         showDialog(
             context: context,
@@ -115,8 +117,6 @@ class _welcomepageState extends State<welcomepage> {
                   ],
                 ));
       }
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => page1()));
     }
 
     return SingleChildScrollView(

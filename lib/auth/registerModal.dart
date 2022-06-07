@@ -20,11 +20,11 @@ class _RegisterModalState extends State<RegisterModal> {
   final emailEditingController = TextEditingController();
   final passwordEditingController = TextEditingController();
   final confirmPasswordEditingController = TextEditingController();
-  loading() {
+  /*loading() {
     setState(() {
       isLoading = true;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +70,8 @@ class _RegisterModalState extends State<RegisterModal> {
           }
           return null;
         },
-        onChanged: (value) {
-          secondNameEditingController.text = value;
+        onSaved: (value) {
+          secondNameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
@@ -102,8 +102,8 @@ class _RegisterModalState extends State<RegisterModal> {
           }
           return null;
         },
-        onChanged: (value) {
-          emailEditingController.text = value;
+        onSaved: (value) {
+          emailEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
@@ -138,8 +138,8 @@ class _RegisterModalState extends State<RegisterModal> {
             return ("Enter Valid Password(Min. 6 Character)");
           }
         },
-        onChanged: (value) {
-          passwordEditingController.text = value;
+        onSaved: (value) {
+          passwordEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
@@ -171,8 +171,8 @@ class _RegisterModalState extends State<RegisterModal> {
           }
           return null;
         },
-        onChanged: (value) {
-          confirmPasswordEditingController.text = value;
+        onSaved: (value) {
+          confirmPasswordEditingController.text = value!;
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
@@ -271,7 +271,7 @@ class _RegisterModalState extends State<RegisterModal> {
                     onPressed: () => {
                       if (_registerkey.currentState!.validate())
                         {
-                          loading(),
+                          //loading(),
                           signUp(emailEditingController.text,
                               passwordEditingController.text),
                         }
@@ -330,6 +330,8 @@ class _RegisterModalState extends State<RegisterModal> {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => {postDetailsToFirestore()});
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => page1()));
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
         case "invalid-email":
@@ -406,8 +408,7 @@ class _RegisterModalState extends State<RegisterModal> {
             context: context,
             builder: (BuildContext context) => AlertDialog(
               title: Text('Error'),
-              content: Text(
-                  'Someone already has this email address. Try another email.'),
+              content: Text('Email is already registered.'),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
               actions: [
@@ -453,8 +454,5 @@ class _RegisterModalState extends State<RegisterModal> {
         .collection("users")
         .doc(user.uid)
         .set(USERMODEL.toMap());
-
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => page1()));
   }
 }
