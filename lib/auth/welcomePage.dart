@@ -98,9 +98,9 @@ class _welcomepageState extends State<welcomepage> {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: emailController.text.trim(),
             password: passwordController.text.trim());
-        // ignore: unused_catch_clause
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => page1()));
+        // ignore: unused_catch_clause
       } on FirebaseAuthException catch (e) {
         showDialog(
             context: context,

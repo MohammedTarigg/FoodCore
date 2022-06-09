@@ -14,20 +14,21 @@ class _dineinpageState extends State<filterpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0,
-          title: Text('Restaurants',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 231, 231, 231),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  fontFamily: 'Alice')),
-        ),
-        body: ListView(
-            shrinkWrap: true,
-            primary: false,
-            children: widget.rests.map(buildrestaurant).toList()));
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        title: Text('Restaurants',
+            style: TextStyle(
+                color: Color.fromARGB(255, 231, 231, 231),
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                fontFamily: 'Alice')),
+      ),
+      body: ListView(
+          shrinkWrap: true,
+          primary: false,
+          children: widget.rests.map(buildrestaurant).toList()),
+    );
   }
 
   Widget buildrestaurant(RestaurantsModel restaurant) => GestureDetector(
