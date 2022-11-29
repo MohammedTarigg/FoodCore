@@ -134,8 +134,8 @@ class _feedbackpageState extends State<feedbackpage> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(214, 32, 32, 32),
-                          onPrimary: Colors.blueGrey,
+                          backgroundColor: Color.fromARGB(214, 32, 32, 32),
+                          foregroundColor: Colors.blueGrey,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                           padding: EdgeInsets.all(15)),

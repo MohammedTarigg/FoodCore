@@ -174,8 +174,8 @@ class _welcomepageState extends State<welcomepage> {
                     width: MediaQuery.of(context).size.width - 20,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 216, 216, 216),
-                          onPrimary: Colors.blueGrey,
+                          backgroundColor: Color.fromARGB(255, 216, 216, 216),
+                          foregroundColor: Colors.blueGrey,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                           padding: EdgeInsets.all(15)),

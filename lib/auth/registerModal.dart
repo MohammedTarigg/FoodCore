@@ -263,8 +263,8 @@ class _RegisterModalState extends State<RegisterModal> {
                   width: MediaQuery.of(context).size.width - 10,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(204, 255, 255, 255),
-                        onPrimary: Colors.blueGrey,
+                        backgroundColor: Color.fromARGB(204, 255, 255, 255),
+                        foregroundColor: Colors.blueGrey,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         padding: EdgeInsets.all(15)),
