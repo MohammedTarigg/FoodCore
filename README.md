@@ -1,5 +1,5 @@
 FoodCore  
-E-Commerce mobile app with web support  
+E-Commerce mobile Flutter app fully integrated with Firebase backend with web support  
 ![foodcorelogin](https://user-images.githubusercontent.com/104147021/204503104-0bfb1129-136c-4e26-a4f4-e4546f5be2e2.jpg)  
 ![foodcoreregister](https://user-images.githubusercontent.com/104147021/204503133-363c53cd-f6d1-4103-b16c-28187179098d.jpg)  
 ![foodcoremain](https://user-images.githubusercontent.com/104147021/204503187-c0e7b018-6ee1-45c6-beae-7a10793fc0c0.jpg)  
